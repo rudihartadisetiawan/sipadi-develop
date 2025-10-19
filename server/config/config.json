@@ -1,0 +1,38 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "babiue",
+    "database": "sipadi_db",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "application_name": "sipadi"
+    },
+    "logging": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "babiue",
+    "database": "sipadi_db_test",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "application_name": "sipadi"
+    },
+    "logging": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "babiue",
+    "database": "sipadi_db",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "application_name": "sipadi"
+    },
+    "logging": false
+  }
+}
