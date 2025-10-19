@@ -172,36 +172,7 @@ const PetaniDashboard = () => {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">Aksi Cepat</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link 
-            to="/lahan/create" 
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-center transition duration-150 ease-in-out"
-          >
-            Tambah Lahan
-          </Link>
-          <Link 
-            to="/panen/create" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-center transition duration-150 ease-in-out"
-          >
-            Laporan Panen
-          </Link>
-          <Link 
-            to="/keluhan/create" 
-            className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md text-center transition duration-150 ease-in-out"
-          >
-            Lapor Keluhan
-          </Link>
-          <Link 
-            to="/artikel" 
-            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-center transition duration-150 ease-in-out"
-          >
-            Artikel
-          </Link>
-        </div>
-      </div>
+
     </div>
   );
 };

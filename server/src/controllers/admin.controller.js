@@ -9,7 +9,7 @@ const getAdminDashboard = catchAsync(async (req, res) => {
     return;
   }
 
-  const dashboardData = await adminService.getAdminDashboardSummary();
+  const dashboardData = await adminService.getAdminDashboardSummary(req.query);
   res.send(dashboardData);
 });
 

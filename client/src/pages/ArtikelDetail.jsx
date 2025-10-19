@@ -26,6 +26,21 @@ const ArtikelDetail = () => {
     }
   }, [id]);
 
+  // Effect to increment view count, runs only once on mount
+  useEffect(() => {
+    if (id) {
+      const incrementView = async () => {
+        try {
+          await api.post(`/artikel/${id}/view`);
+        } catch (err) {
+          // Log error but don't show it to the user, as it's not critical
+          console.error('Failed to increment view count:', err);
+        }
+      };
+      incrementView();
+    }
+  }, [id]); // Dependency on ID ensures it runs for new pages but not on re-renders
+
   const fetchArtikel = async () => {
     try {
       setLoading(true);

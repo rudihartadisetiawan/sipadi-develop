@@ -74,15 +74,15 @@ const ArtikelForm = () => {
 
     if (gambarFile) {
       const formData = new FormData();
-      formData.append('file', gambarFile);
+      formData.append('files', gambarFile);
 
       try {
-        const response = await api.post('/upload', formData, {
+        const response = await api.post('/uploads', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        imageUrl = response.url;
+        imageUrl = response.urls[0];
       } catch (err) {
         setError('Gagal mengunggah gambar');
         console.error('Error uploading image:', err);

@@ -14,6 +14,21 @@ const AdminAnalitik = () => {
     year: new Date().getFullYear(),
     kecamatan: ''
   });
+  const [kecamatanOptions, setKecamatanOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchKecamatanOptions = async () => {
+      try {
+        const response = await fetch('/batas_kecamatan_demak.geojson');
+        const geojsonData = await response.json();
+        const options = [...new Set(geojsonData.features.map(feature => feature.properties.WADMKC))].sort();
+        setKecamatanOptions(options);
+      } catch (error) {
+        console.error("Failed to fetch kecamatan options:", error);
+      }
+    };
+    fetchKecamatanOptions();
+  }, []);
 
   useEffect(() => {
     fetchAnalyticsData();
@@ -111,10 +126,9 @@ const AdminAnalitik = () => {
               className="py-2 px-3 block w-full shadow-sm focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md"
             >
               <option value="">Semua Kecamatan</option>
-              <option value="Wonosalam">Wonosalam</option>
-              <option value="Dempet">Dempet</option>
-              <option value="Gajah">Gajah</option>
-              <option value="Karanganyar">Karanganyar</option>
+              {kecamatanOptions.map(kec => (
+                <option key={kec} value={kec}>{kec}</option>
+              ))}
             </select>
           </div>
         </div>

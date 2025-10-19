@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import api from '../lib/api';
 
 const AdminManajemenKonten = () => {
@@ -34,18 +35,28 @@ const AdminManajemenKonten = () => {
   };
 
   const deleteArticle = async (id) => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus artikel ini?')) {
-      try {
-        await api.delete(`/artikel/${id}`);
-        // Show success message
-        toast.success('Artikel berhasil dihapus');
-        fetchArticles(); // Refetch articles after deletion
-      } catch (err) {
-        const errorMessage = err.response?.data?.message || 'Gagal menghapus artikel';
-        toast.error(errorMessage);
-        console.error('Error deleting article:', err);
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: "Artikel yang dihapus tidak dapat dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#16a34a', // green-600
+      cancelButtonColor: '#6b7280', // gray-500
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete(`/artikel/${id}`);
+          toast.success('Artikel berhasil dihapus');
+          fetchArticles(); // Refetch articles after deletion
+        } catch (err) {
+          const errorMessage = err.response?.data?.message || 'Gagal menghapus artikel';
+          toast.error(errorMessage);
+          console.error('Error deleting article:', err);
+        }
       }
-    }
+    });
   };
 
   // Filter articles berdasarkan pencarian

@@ -74,13 +74,7 @@ const updateKeluhan = catchAsync(async (req, res) => {
 });
 
 const deleteKeluhan = catchAsync(async (req, res) => {
-  // For petani, verify they own the complaint before deleting
-  if (req.user.role === 'petani') {
-    const keluhan = await keluhanService.getKeluhanById(req.params.keluhanId);
-    await lahanService.getLahanById(keluhan.lahan_id, req.user.id);
-  }
-
-  await keluhanService.deleteKeluhanById(req.params.keluhanId);
+  await keluhanService.deleteKeluhanById(req.params.keluhanId, req.user.id, req.user.role);
   res.status(httpStatus.NO_CONTENT).send();
 });
 

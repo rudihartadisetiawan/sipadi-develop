@@ -71,10 +71,16 @@ const deleteArtikel = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const incrementViewCount = catchAsync(async (req, res) => {
+  await artikelService.incrementArtikelViewCount(req.params.artikelId);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
 module.exports = {
   createArtikel,
   getArtikels,
   getArtikel,
   updateArtikel,
   deleteArtikel,
+  incrementViewCount,
 };

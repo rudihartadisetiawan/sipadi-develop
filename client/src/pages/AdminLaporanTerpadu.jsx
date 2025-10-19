@@ -46,7 +46,7 @@ const AdminLaporanTerpadu = () => {
         api.get('/admin/harvest-stats/region', { params: filters }),
         api.get('/admin/complaints-stats/status', { params: filters }),
         api.get('/admin/complaints-stats/category', { params: filters }),
-        api.get('/admin/dashboard')
+        api.get('/admin/dashboard', { params: filters }) // Pass filters here
       ]);
 
       // Add a new, separate call for filtered complaints

@@ -79,10 +79,21 @@ const getArtikelById = async (id) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Artikel not found');
   }
 
-  // Increase view count secara aman tanpa mempengaruhi field lain
-  await Artikel.update({ views: artikel.views + 1 }, { where: { id } });
-
   return artikel;
+};
+
+/**
+ * Increment view count for an article
+ * @param {number} artikelId
+ * @returns {Promise<void>}
+ */
+const incrementArtikelViewCount = async (artikelId) => {
+  const artikel = await Artikel.findByPk(artikelId);
+  if (!artikel) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Artikel not found');
+  }
+  // Use atomic increment to prevent race conditions
+  await artikel.increment('views');
 };
 
 /**
@@ -132,4 +143,5 @@ module.exports = {
   getArtikelById,
   updateArtikelById,
   deleteArtikelById,
+  incrementArtikelViewCount,
 };

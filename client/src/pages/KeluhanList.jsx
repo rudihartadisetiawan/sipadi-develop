@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api, { API_BASE_URL } from '../lib/api';
 import { getCurrentUser } from '../lib/auth';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 const KeluhanList = () => {
   const currentUser = getCurrentUser();
@@ -25,6 +27,29 @@ const KeluhanList = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: 'Apakah Anda yakin?',
+      text: "Keluhan yang dihapus tidak dapat dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#16a34a',
+      cancelButtonColor: '#6b7280',
+      confirmButtonText: 'Ya, hapus!',
+      cancelButtonText: 'Batal'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete(`/keluhan/${id}`);
+          toast.success('Keluhan berhasil dihapus');
+          fetchKeluhans(); // Refetch
+        } catch (err) {
+          toast.error(err.response?.data?.message || 'Gagal menghapus keluhan');
+        }
+      }
+    });
   };
 
 
@@ -149,7 +174,15 @@ const KeluhanList = () => {
                       </Link>
                     )}
 
-
+                    {/* Tombol Hapus untuk Petani yang memiliki keluhan */}
+                    {currentUser && currentUser.id === keluhan.user_id && (
+                      <button
+                        onClick={() => handleDelete(keluhan.id)}
+                        className="text-sm font-medium text-red-600 hover:text-red-900"
+                      >
+                        Hapus
+                      </button>
+                    )}
                   </div>
                 </div>
               </li>

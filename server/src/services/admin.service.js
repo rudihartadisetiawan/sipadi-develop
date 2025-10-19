@@ -5,9 +5,28 @@ const { Lahan, Panen, Keluhan, User, Artikel } = require('../models');
 /**
  * Get admin dashboard summary
  */
-const getAdminDashboardSummary = async () => {
-  const totalLahan = await Lahan.count();
-  const totalPetani = await User.count({ where: { role: 'petani' } });
+const getAdminDashboardSummary = async (filters = {}) => {
+  const { kecamatan } = filters;
+  const whereLahan = {};
+  if (kecamatan) {
+    whereLahan.kecamatan = kecamatan;
+  }
+
+  const totalLahan = await Lahan.count({ where: whereLahan });
+
+  // If filtering by kecamatan, count distinct users who have lahan in that kecamatan
+  let totalPetani;
+  if (kecamatan) {
+    totalPetani = await Lahan.count({
+      where: whereLahan,
+      distinct: true,
+      col: 'user_id',
+    });
+  } else {
+    totalPetani = await User.count({ where: { role: 'petani' } });
+  }
+
+  // These stats remain system-wide totals
   const totalPanen = await Panen.count();
   const totalKeluhan = await Keluhan.count();
   const totalArtikel = await Artikel.count();
@@ -137,9 +156,16 @@ const getComplaintsStatsByStatus = async (filters = {}) => {
     attributes: ['status', [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
     where: whereKeluhan,
     group: ['status'],
+    raw: true, // Add raw: true to get plain objects
   });
 
-  return stats;
+  // Transform the data to match the chart's expected format ({ name, value })
+  const transformedStats = stats.map(item => ({
+    name: item.status,
+    count: parseInt(item.count, 10),
+  }));
+
+  return transformedStats;
 };
 
 /**

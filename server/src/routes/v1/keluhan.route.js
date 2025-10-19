@@ -18,6 +18,6 @@ router
   .route('/:keluhanId')
   .get(auth('petani', 'admin'), keluhanController.getKeluhan)
   .patch(auth('admin'), validate(keluhanValidation.updateKeluhan), keluhanController.updateKeluhan)
-  .delete(auth('petani'), keluhanController.deleteKeluhan);
+  .delete(auth('petani', 'admin'), keluhanController.deleteKeluhan);
 
 module.exports = router;

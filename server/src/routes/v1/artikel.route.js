@@ -19,6 +19,9 @@ router
   .put(auth('admin'), validate(artikelValidation.updateArtikel), artikelController.updateArtikel)
   .delete(auth('admin'), artikelController.deleteArtikel);
 
+// Route to increment view count
+router.route('/:artikelId/view').post(artikelController.incrementViewCount);
+
 // Comments for articles
 router
   .route('/:artikelId/komentar')

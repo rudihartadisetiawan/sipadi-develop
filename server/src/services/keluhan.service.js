@@ -142,8 +142,14 @@ const updateKeluhanById = async (keluhanId, updateBody) => {
  * @param {number} keluhanId
  * @returns {Promise}
  */
-const deleteKeluhanById = async (keluhanId) => {
+const deleteKeluhanById = async (keluhanId, userId, userRole) => {
   const keluhan = await getKeluhanById(keluhanId);
+
+  // Check for ownership or admin role
+  if (userRole !== 'admin' && keluhan.user_id !== userId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'You are not authorized to delete this complaint');
+  }
+
   await keluhan.destroy();
 };
 
