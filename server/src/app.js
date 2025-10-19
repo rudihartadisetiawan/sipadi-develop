@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const compression = require('compression');
@@ -27,7 +28,7 @@ app.use(xss());
 app.use(compression());
 
 // serve static files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../../public')));
 
 // Explicitly configure CORS
 const corsOptions = {

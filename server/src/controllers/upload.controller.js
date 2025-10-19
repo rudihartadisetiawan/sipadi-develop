@@ -7,7 +7,7 @@ const uploadFile = catchAsync(async (req, res) => {
   }
 
   const urls = req.files.map((file) => {
-    return `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+    return `/uploads/${file.filename}`;
   });
 
   res.status(httpStatus.CREATED).send({

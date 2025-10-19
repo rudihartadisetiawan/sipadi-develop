@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import api from '../lib/api';
+import api, { API_BASE_URL } from '../lib/api';
 
 const ArtikelDetail = () => {
   const params = useParams();
@@ -71,7 +71,7 @@ const ArtikelDetail = () => {
         <div className="bg-white shadow rounded-lg overflow-hidden">
           {artikel.gambar_utama && (
             <img 
-              src={`${import.meta.env.VITE_API_URL.replace('/v1', '')}${artikel.gambar_utama}`} 
+              src={`${API_BASE_URL}${artikel.gambar_utama}`} 
               alt={artikel.judul}
               className="w-full h-64 object-contain"
             />

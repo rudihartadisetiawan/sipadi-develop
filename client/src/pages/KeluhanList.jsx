@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../lib/api';
+import api, { API_BASE_URL } from '../lib/api';
 import { getCurrentUser } from '../lib/auth';
 
 const KeluhanList = () => {
@@ -117,9 +117,9 @@ const KeluhanList = () => {
                   {keluhan.foto_bukti && keluhan.foto_bukti.length > 0 && (
                     <div className="mt-2">
                       <div className="relative w-24 h-24">
-                        <a href={keluhan.foto_bukti[0]} target="_blank" rel="noopener noreferrer" title="Lihat gambar bukti">
+                        <a href={`${API_BASE_URL}${keluhan.foto_bukti[0]}`} target="_blank" rel="noopener noreferrer" title="Lihat gambar bukti">
                           <img 
-                            src={keluhan.foto_bukti[0]} 
+                            src={`${API_BASE_URL}${keluhan.foto_bukti[0]}`} 
                             alt="Foto bukti 1" 
                             className="h-24 w-24 object-cover rounded-md border border-gray-200 hover:opacity-80 transition-opacity"
                           />

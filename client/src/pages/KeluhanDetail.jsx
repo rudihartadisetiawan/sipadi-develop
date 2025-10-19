@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import api from '../lib/api';
+import api, { API_BASE_URL } from '../lib/api';
 
 const KeluhanDetail = () => {
   const { id } = useParams();
@@ -110,9 +110,9 @@ const KeluhanDetail = () => {
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <div className="flex flex-wrap gap-4">
                     {keluhan.foto_bukti.map((url, index) => (
-                      <a key={index} href={url} target="_blank" rel="noopener noreferrer">
+                      <a key={index} href={`${API_BASE_URL}${url}`} target="_blank" rel="noopener noreferrer">
                         <img 
-                          src={url} 
+                          src={`${API_BASE_URL}${url}`} 
                           alt={`Bukti keluhan ${index + 1}`}
                           className="rounded-lg max-w-xs h-40 w-40 object-cover border border-gray-200 hover:opacity-80 transition-opacity" 
                         />
