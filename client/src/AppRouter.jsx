@@ -23,6 +23,9 @@ import AdminAnalitik from './pages/AdminAnalitik';
 import AdminManajemenKonten from './pages/AdminManajemenKonten';
 import KeluhanEditForm from './pages/KeluhanEditForm';
 import ArtikelForm from './pages/ArtikelForm';
+import AdminTokoList from './pages/AdminTokoList';
+import AdminTokoForm from './pages/AdminTokoForm';
+import PetaToko from './pages/PetaToko';
 
 const AppContent = () => {
   const location = useLocation();
@@ -53,6 +56,7 @@ const AppContent = () => {
           {/* Pindahkan route edit sebelum route artikel detail untuk menghindari konflik */}
           <ProtectedRoute exact path="/admin/artikel/edit/:id" component={ArtikelForm} allowedRoles={['admin']} />
           <ProtectedRoute exact path="/artikel/:id" component={ArtikelDetail} allowedRoles={['petani', 'admin']} />
+          <ProtectedRoute exact path="/peta-toko" component={PetaToko} allowedRoles={['petani', 'admin']} />
           
           {/* Rute terproteksi untuk admin */}
           <ProtectedRoute exact path="/admin/dashboard" component={AdminDashboard} allowedRoles={['admin']} />
@@ -61,6 +65,9 @@ const AppContent = () => {
           <ProtectedRoute exact path="/admin/analitik" component={AdminAnalitik} allowedRoles={['admin']} />
           <ProtectedRoute exact path="/admin/manajemen-konten" component={AdminManajemenKonten} allowedRoles={['admin']} />
           <ProtectedRoute exact path="/admin/artikel/new" component={ArtikelForm} allowedRoles={['admin']} />
+          <ProtectedRoute exact path="/admin/toko" component={AdminTokoList} allowedRoles={['admin']} />
+          <ProtectedRoute exact path="/admin/toko/create" component={AdminTokoForm} allowedRoles={['admin']} />
+          <ProtectedRoute exact path="/admin/toko/edit/:id" component={AdminTokoForm} allowedRoles={['admin']} />
           
           {/* Rute default */}
           <Route path="/">

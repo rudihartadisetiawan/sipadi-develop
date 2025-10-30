@@ -32,10 +32,10 @@ const registerUser = async (userBody) => {
   // Create user with role 'petani' by default
   const user = await User.create({
     nik: userBody.nik,
-    nama: userBody.nama,
+    name: userBody.nama,
     email: userBody.email,
     no_telepon: userBody.no_telepon,
-    password_hash: userBody.password, // This will be hashed by the model hook
+    password: userBody.password,
     role: 'petani', // Default role for register is petani
     alamat: userBody.alamat,
   });

@@ -61,7 +61,7 @@ const ArtikelList = () => {
             <div key={artikel.id} className="bg-white shadow rounded-lg overflow-hidden">
               {artikel.gambar_utama && (
                 <img 
-                  src={`${import.meta.env.VITE_API_URL.replace('/v1', '')}${artikel.gambar_utama}`} 
+                  src={artikel.gambar_utama} 
                   alt={artikel.judul}
                   className="w-full h-48 object-contain"
                 />

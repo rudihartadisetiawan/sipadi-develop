@@ -65,13 +65,11 @@ const queryKeluhan = async (filter, options) => {
         attributes: ['id', 'nama_lahan', 'desa', 'kecamatan'],
         where: whereLahan,
         required: !!filter.kecamatan, // Make it an INNER JOIN if filtering by kecamatan
-        include: [
-          {
-            model: User,
-            as: 'user',
-            attributes: ['id', 'nik', 'name'],
-          },
-        ],
+      },
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'name'],
       },
     ],
   };

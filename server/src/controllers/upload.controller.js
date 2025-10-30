@@ -7,7 +7,9 @@ const uploadFile = catchAsync(async (req, res) => {
   }
 
   const urls = req.files.map((file) => {
-    return `/uploads/${file.filename}`;
+    // Construct the full URL including protocol, host, and path
+    const fullUrl = `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
+    return fullUrl;
   });
 
   res.status(httpStatus.CREATED).send({

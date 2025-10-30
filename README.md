@@ -24,7 +24,9 @@
 
 ## 🌾 Tentang Proyek
 
-**Sipadi** adalah sistem informasi terintegrasi yang dirancang untuk memodernisasi manajemen data pertanian di Kabupaten Demak. Aplikasi ini menjembatani kesenjangan antara petani dan dinas pertanian dengan menyediakan platform digital untuk pelaporan, pemantauan, dan analisis data agrikultur secara efisien dan akurat.
+**Sipadi** adalah sistem informasi terintegrasi yang dikembangkan untuk mendukung program ketahanan pangan yang diinisiasi oleh TNI AD. Kabupaten Demak dipilih sebagai lokasi percontohan (prototype) untuk implementasi sistem ini.
+
+Aplikasi ini bertujuan untuk memodernisasi manajemen data pertanian dan menjembatani kesenjangan antara petani dengan dinas terkait, melalui platform digital untuk pelaporan, pemantauan, dan analisis data agrikultur yang efisien dan akurat.
 
 ---
 

@@ -86,7 +86,7 @@ const ArtikelDetail = () => {
         <div className="bg-white shadow rounded-lg overflow-hidden">
           {artikel.gambar_utama && (
             <img 
-              src={`${API_BASE_URL}${artikel.gambar_utama}`} 
+              src={artikel.gambar_utama} 
               alt={artikel.judul}
               className="w-full h-64 object-contain"
             />

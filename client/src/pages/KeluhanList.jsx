@@ -142,9 +142,9 @@ const KeluhanList = () => {
                   {keluhan.foto_bukti && keluhan.foto_bukti.length > 0 && (
                     <div className="mt-2">
                       <div className="relative w-24 h-24">
-                        <a href={`${API_BASE_URL}${keluhan.foto_bukti[0]}`} target="_blank" rel="noopener noreferrer" title="Lihat gambar bukti">
+                        <a href={keluhan.foto_bukti[0]} target="_blank" rel="noopener noreferrer" title="Lihat gambar bukti">
                           <img 
-                            src={`${API_BASE_URL}${keluhan.foto_bukti[0]}`} 
+                            src={keluhan.foto_bukti[0]} 
                             alt="Foto bukti 1" 
                             className="h-24 w-24 object-cover rounded-md border border-gray-200 hover:opacity-80 transition-opacity"
                           />

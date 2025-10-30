@@ -142,12 +142,18 @@ const AdminDashboard = () => {
                         {keluhan.lahan.nama_lahan}
                       </p>
                       <p className="text-sm text-gray-500">
-                        Oleh: {keluhan.lahan.user.nama} • {keluhan.kategori} • {keluhan.status}
+                        Oleh: {keluhan.lahan.user.name} • {keluhan.kategori} • {keluhan.status}
                       </p>
                       <p className="text-xs text-gray-400 mt-1">
                         {new Date(keluhan.tanggal_keluhan).toLocaleDateString('id-ID')}
                       </p>
                     </div>
+                    <Link
+                      to={`/keluhan/edit/${keluhan.id}`}
+                      className="text-sm font-medium text-green-600 hover:text-green-800"
+                    >
+                      Lihat
+                    </Link>
                   </div>
                 </li>
               ))}

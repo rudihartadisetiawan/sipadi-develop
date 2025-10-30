@@ -159,7 +159,7 @@ const PetaniDashboard = () => {
                         {keluhan.kategori} • {keluhan.status}
                       </p>
                     </div>
-                    <Link to={`/keluhan/edit/${keluhan.id}`} className="text-sm text-green-600 hover:text-green-900">
+                    <Link to={`/keluhan/detail/${keluhan.id}`} className="text-sm text-green-600 hover:text-green-900">
                       Lihat
                     </Link>
                   </div>

@@ -36,6 +36,13 @@ const User = sequelize.define(
     no_telepon: {
       type: DataTypes.STRING(15),
     },
+    password: {
+      type: DataTypes.VIRTUAL,
+      validate: {
+        notEmpty: true,
+        len: [8, Infinity],
+      }
+    },
     password_hash: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -72,15 +79,13 @@ const User = sequelize.define(
     underscored: true,
     hooks: {
       beforeCreate: async (user) => {
-        if (user.password_hash) {
-          // eslint-disable-next-line no-param-reassign
-          user.password_hash = await bcrypt.hash(user.password_hash, 8);
+        if (user.password) {
+          user.password_hash = await bcrypt.hash(user.password, 8);
         }
       },
       beforeUpdate: async (user) => {
-        if (user.changed('password_hash')) {
-          // eslint-disable-next-line no-param-reassign
-          user.password_hash = await bcrypt.hash(user.password_hash, 8);
+        if (user.changed('password')) {
+          user.password_hash = await bcrypt.hash(user.password, 8);
         }
       },
     },

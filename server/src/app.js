@@ -21,14 +21,26 @@ if (config.env !== 'test') {
   app.use(morgan.errorHandler);
 }
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "data:", "blob:"],
+      },
+    },
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(xss());
 app.use(compression());
 
+// Disable ETag generation
+app.disable('etag');
+
 // serve static files
-app.use(express.static(path.join(__dirname, '../../public')));
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 // Explicitly configure CORS
 const corsOptions = {

@@ -38,6 +38,9 @@ const Navbar = () => {
                     <Link to="/artikel" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-green-600">
                       Artikel
                     </Link>
+                    <Link to="/peta-toko" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-green-600">
+                      Peta Toko
+                    </Link>
                   </>
                 )}
                 {user && user.role === 'admin' && (
@@ -59,6 +62,9 @@ const Navbar = () => {
                     </Link>
                     <Link to="/keluhan" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-green-600">
                       Manajemen Keluhan
+                    </Link>
+                    <Link to="/admin/toko" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-green-600">
+                      Manajemen Toko
                     </Link>
                   </>
                 )}

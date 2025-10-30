@@ -8,6 +8,7 @@ const Keluhan = require('./Keluhan');
 const Artikel = require('./Artikel');
 const Komentar = require('./Komentar');
 const Token = require('./Token');
+const TokoPertanian = require('./TokoPertanian');
 
 const db = {};
 
@@ -19,6 +20,7 @@ db.Keluhan = Keluhan;
 db.Artikel = Artikel;
 db.Komentar = Komentar;
 db.Token = Token;
+db.TokoPertanian = TokoPertanian;
 
 // Define associations using the associate method in each model
 Object.keys(db).forEach((modelName) => {

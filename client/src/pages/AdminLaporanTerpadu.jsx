@@ -100,6 +100,7 @@ const AdminLaporanTerpadu = () => {
       </div>
     );
   }
+  console.log('Reports data:', reports);
 
   return (
     <div className="space-y-6">
@@ -159,7 +160,7 @@ const AdminLaporanTerpadu = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white shadow rounded-lg p-4">
           <h3 className="text-sm font-medium text-gray-600">Total Laporan Panen</h3>
-          <p className="text-2xl font-bold text-green-600">{reports.harvestByRegion.reduce((sum, item) => sum + item.jumlah_laporan, 0)}</p>
+          <p className="text-2xl font-bold text-green-600">{reports.harvestByRegion.reduce((sum, item) => sum + Number(item.jumlah_laporan || 0), 0)}</p>
         </div>
         <div className="bg-white shadow rounded-lg p-4">
           <h3 className="text-sm font-medium text-gray-600">Total Laporan Keluhan</h3>
@@ -276,7 +277,7 @@ const AdminLaporanTerpadu = () => {
                     {complaint.lahan?.nama_lahan || 'N/A'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {complaint.lahan?.user?.name || 'N/A'}
+                    {complaint.user?.name || 'N/A'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {complaint.kategori}

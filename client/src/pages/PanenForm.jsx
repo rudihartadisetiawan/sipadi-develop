@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import api from '../lib/api';
 import { format, parseISO } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -66,18 +67,28 @@ const PanenForm = () => {
     setLoading(true);
     setError(null);
 
+    const payload = {
+      ...formData,
+      lahan_id: parseInt(formData.lahan_id, 10),
+      jumlah_panen: parseFloat(formData.jumlah_panen),
+      harga_jual: formData.harga_jual ? parseFloat(formData.harga_jual) : undefined,
+    };
+
     try {
       if (id) {
         // Update panen
-        await api.patch(`/panen/${id}`, formData);
+        await api.patch(`/panen/${id}`, payload);
+        toast.success('Laporan panen berhasil diperbarui!');
       } else {
         // Create panen
-        await api.post('/panen', formData);
+        await api.post('/panen', payload);
+        toast.success('Laporan panen baru berhasil ditambahkan!');
       }
       history.push('/panen');
     } catch (err) {
-      setError('Gagal menyimpan laporan panen');
-      console.error('Error saving panen:', err);
+      const errorMessage = err.response?.data?.message || 'Gagal menyimpan laporan panen';
+      setError(errorMessage);
+      console.error('Error saving panen:', err.response?.data || err);
     } finally {
       setLoading(false);
     }

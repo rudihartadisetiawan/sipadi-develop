@@ -52,6 +52,10 @@ const defaultRoutes = [
     route: uploadRoute,
   },
   {
+    path: '/toko',
+    route: require('./toko.route'),
+  },
+  {
     path: '/docs',
     route: docsRoute,
   },

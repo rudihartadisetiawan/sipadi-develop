@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import api from '../lib/api';
 import MapInput from '../components/MapInput'; // Impor komponen peta
 
@@ -106,9 +107,11 @@ const LahanForm = () => {
       if (id) {
         // Update lahan
         await api.patch(`/lahan/${id}`, submitData);
+        toast.success('Data lahan berhasil diperbarui!');
       } else {
         // Create lahan
         await api.post('/lahan', submitData);
+        toast.success('Lahan baru berhasil ditambahkan!');
       }
       history.push('/lahan');
     } catch (err) {

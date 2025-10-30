@@ -247,7 +247,17 @@ const getLahanForMap = async (filters = {}) => {
 };
 
 const getAnalytics = async (filters) => {
-  const { year } = filters;
+  const { year, kecamatan } = filters;
+
+  const whereClauses = ['EXTRACT(YEAR FROM tanggal_panen) = :year'];
+  const replacements = { year };
+
+  if (kecamatan) {
+    whereClauses.push('l.kecamatan = :kecamatan');
+    replacements.kecamatan = kecamatan;
+  }
+
+  const whereSql = `WHERE ${whereClauses.join(' AND ')}`;
 
   const harvestTrend = await sequelize.query(
     `
@@ -257,13 +267,13 @@ const getAnalytics = async (filters) => {
       SUM(l.luas) as luas_panen
     FROM panen p
     JOIN lahan l ON p.lahan_id = l.id
-    WHERE EXTRACT(YEAR FROM tanggal_panen) = :year
+    ${whereSql}
     GROUP BY TO_CHAR(tanggal_panen, 'Mon'), EXTRACT(MONTH FROM tanggal_panen)
     ORDER BY EXTRACT(MONTH FROM tanggal_panen);
   `,
     {
       type: sequelize.QueryTypes.SELECT,
-      replacements: { year },
+      replacements,
     }
   );
 
@@ -275,12 +285,12 @@ const getAnalytics = async (filters) => {
       SUM(l.luas) as luas_lahan
     FROM panen p
     JOIN lahan l ON p.lahan_id = l.id
-    WHERE EXTRACT(YEAR FROM tanggal_panen) = :year
+    ${whereSql}
     GROUP BY l.kecamatan;
   `,
     {
       type: sequelize.QueryTypes.SELECT,
-      replacements: { year },
+      replacements,
     }
   );
 
@@ -299,10 +309,14 @@ const getAnalytics = async (filters) => {
       SUM(p.jumlah_panen) / NULLIF(SUM(l.luas), 0) as produktivitas
     FROM panen p
     JOIN lahan l ON p.lahan_id = l.id
+    ${whereSql}
     GROUP BY musim
     ORDER BY musim;
   `,
-    { type: sequelize.QueryTypes.SELECT }
+    {
+      type: sequelize.QueryTypes.SELECT,
+      replacements,
+    }
   );
 
   return {

@@ -1,2 +1,11 @@
 module.exports.authController = require('./auth.controller');
 module.exports.userController = require('./user.controller');
+module.exports.adminController = require('./admin.controller');
+module.exports.artikelController = require('./artikel.controller');
+module.exports.dashboardController = require('./dashboard.controller');
+module.exports.keluhanController = require('./keluhan.controller');
+module.exports.komentarController = require('./komentar.controller');
+module.exports.lahanController = require('./lahan.controller');
+module.exports.panenController = require('./panen.controller');
+module.exports.tokoController = require('./toko.controller');
+module.exports.uploadController = require('./upload.controller');

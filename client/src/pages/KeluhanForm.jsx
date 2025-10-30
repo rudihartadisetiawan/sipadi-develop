@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import api from '../lib/api';
 
 const KeluhanForm = () => {
@@ -87,6 +88,7 @@ const KeluhanForm = () => {
       };
 
       await api.post('/keluhan', payload);
+      toast.success('Laporan keluhan berhasil dikirim!');
       history.push('/keluhan');
 
     } catch (err) {
